@@ -21,7 +21,7 @@ import com.example.adapter.MessageGroupFragmentAdapter;
 import com.example.textviewdemo.R;
 
 /**
- * 首页
+ * 棣栭〉
  * @author Ansen
  * @create time 2015-09-08
  */
@@ -33,7 +33,7 @@ public class MainFragment extends Fragment {
 	private ImageView ivShapeCircle;
 	private TextView tvFollow,tvRecommend,tvLocation;
 	
-    private int offset=0;//偏移量216  我这边只是举例说明,不同手机值不一样
+    private int offset=0;//鍋忕Щ閲�216  鎴戣繖杈瑰彧鏄妇渚嬭鏄�,涓嶅悓鎵嬫満鍊间笉涓�鏍�
     private int currentIndex=1;
 
 	@Override
@@ -42,7 +42,7 @@ public class MainFragment extends Fragment {
 		
 
 		/**
-		 * 初始化三个Fragment  并且填充到ViewPager
+		 * 鍒濆鍖栦笁涓狥ragment  骞朵笖濉厖鍒癡iewPager
 		 */
 		vPager = (ViewPager) rootView.findViewById(R.id.viewpager_home);
 		DynamicFragment dynamicFragment = new DynamicFragment();
@@ -51,7 +51,8 @@ public class MainFragment extends Fragment {
 		list.add(dynamicFragment);
 		list.add(messageFragment);
 		list.add(personFragment);
-		adapter = new MessageGroupFragmentAdapter(getActivity().getSupportFragmentManager(), list);
+//		adapter = new MessageGroupFragmentAdapter(getActivity().getSupportFragmentManager(), list);
+		adapter = new MessageGroupFragmentAdapter(getChildFragmentManager(), list);
 		vPager.setAdapter(adapter);
 		vPager.setOffscreenPageLimit(2);
 		vPager.setCurrentItem(1);
@@ -62,11 +63,11 @@ public class MainFragment extends Fragment {
 		
 		tvFollow=(TextView) rootView.findViewById(R.id.tv_follow);
 		tvRecommend=(TextView) rootView.findViewById(R.id.tv_recommend);
-		tvRecommend.setSelected(true);//推荐默认选中
+		tvRecommend.setSelected(true);//鎺ㄨ崘榛樿閫変腑
 		tvLocation=(TextView) rootView.findViewById(R.id.tv_location);
 		
 		/**
-		 * 标题栏三个按钮设置点击效果
+		 * 鏍囬鏍忎笁涓寜閽缃偣鍑绘晥鏋�
 		 */
 		tvFollow.setOnClickListener(clickListener);
 		tvRecommend.setOnClickListener(clickListener);
@@ -81,8 +82,8 @@ public class MainFragment extends Fragment {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_follow:
-				//当我们设置setCurrentItem的时候就会触发viewpager的OnPageChangeListener借口,
-				//所以我们不需要去改变标题栏字体啥的
+				//褰撴垜浠缃畇etCurrentItem鐨勬椂鍊欏氨浼氳Е鍙憊iewpager鐨凮nPageChangeListener鍊熷彛,
+				//鎵�浠ユ垜浠笉闇�瑕佸幓鏀瑰彉鏍囬鏍忓瓧浣撳暐鐨�
 				vPager.setCurrentItem(0);
 				break;
 			case R.id.tv_recommend:
@@ -101,22 +102,22 @@ public class MainFragment extends Fragment {
 		int width = metric.widthPixels;
 		Matrix matrix = new Matrix();
 		
-		//标题栏我用weight设置权重  分成5份
-		//(width / 5) * 2  这里表示标题栏两个控件的宽度
-		//(width / 10)  标题栏一个控件的2分之一
-		//7  约等于原点宽度的一半
-		matrix.postTranslate((width / 5) * 2 + (width / 10)-7,0);//图片平移
+		//鏍囬鏍忔垜鐢╳eight璁剧疆鏉冮噸  鍒嗘垚5浠�
+		//(width / 5) * 2  杩欓噷琛ㄧず鏍囬鏍忎袱涓帶浠剁殑瀹藉害
+		//(width / 10)  鏍囬鏍忎竴涓帶浠剁殑2鍒嗕箣涓�
+		//7  绾︾瓑浜庡師鐐瑰搴︾殑涓�鍗�
+		matrix.postTranslate((width / 5) * 2 + (width / 10)-7,0);//鍥剧墖骞崇Щ
 		ivShapeCircle.setImageMatrix(matrix);
 		
-		//一个控件的宽度  我的手机宽度是1080/5=216 不同的手机宽度会不一样哦
+		//涓�涓帶浠剁殑瀹藉害  鎴戠殑鎵嬫満瀹藉害鏄�1080/5=216 涓嶅悓鐨勬墜鏈哄搴︿細涓嶄竴鏍峰摝
 		offset=(width / 5);
 	}
 
 	/**
-	 * ViewPager滑动监听,用位移动画实现指示器效果
+	 * ViewPager婊戝姩鐩戝惉,鐢ㄤ綅绉诲姩鐢诲疄鐜版寚绀哄櫒鏁堟灉
 	 * 
-	 * TranslateAnimation 强调一个地方,无论你移动了多少次,现在停留在哪里,你的起始位置从未变化过.
-	 * 例如:我这个demo里面  推荐移动到了同城,指示器也停留到了同城下面,但是指示器在屏幕上的位置还是推荐下面.
+	 * TranslateAnimation 寮鸿皟涓�涓湴鏂�,鏃犺浣犵Щ鍔ㄤ簡澶氬皯娆�,鐜板湪鍋滅暀鍦ㄥ摢閲�,浣犵殑璧峰浣嶇疆浠庢湭鍙樺寲杩�.
+	 * 渚嬪:鎴戣繖涓猟emo閲岄潰  鎺ㄨ崘绉诲姩鍒颁簡鍚屽煄,鎸囩ず鍣ㄤ篃鍋滅暀鍒颁簡鍚屽煄涓嬮潰,浣嗘槸鎸囩ず鍣ㄥ湪灞忓箷涓婄殑浣嶇疆杩樻槸鎺ㄨ崘涓嬮潰.
 	 */
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
 		@Override
@@ -135,7 +136,7 @@ public class MainFragment extends Fragment {
 	};
 	
 	/**
-	 * 改变标题栏字体颜色
+	 * 鏀瑰彉鏍囬鏍忓瓧浣撻鑹�
 	 * @param index
 	 */
 	private void changeTextColor(int index){
@@ -157,30 +158,30 @@ public class MainFragment extends Fragment {
 	}
 	
 	/**
-	 * 移动标题栏点点点...
+	 * 绉诲姩鏍囬鏍忕偣鐐圭偣...
 	 * @param index
 	 */
 	private void translateAnimation(int index){
 		TranslateAnimation animation = null;
 		switch(index){
 		case 0:
-			if(currentIndex==1){//从推荐移动到关注   X坐标向左移动216
+			if(currentIndex==1){//浠庢帹鑽愮Щ鍔ㄥ埌鍏虫敞   X鍧愭爣鍚戝乏绉诲姩216
 				animation=new TranslateAnimation(0,-offset,0,0);
-			}else if (currentIndex == 2) {//从同城移动到关注   X坐标向左移动216*2  记住起始x坐标是同城那里
+			}else if (currentIndex == 2) {//浠庡悓鍩庣Щ鍔ㄥ埌鍏虫敞   X鍧愭爣鍚戝乏绉诲姩216*2  璁颁綇璧峰x鍧愭爣鏄悓鍩庨偅閲�
                 animation = new TranslateAnimation(offset, -offset, 0, 0);  
             }
 			break;
 		case 1:
-            if(currentIndex==0){//从关注移动到推荐   X坐标向右移动216
+            if(currentIndex==0){//浠庡叧娉ㄧЩ鍔ㄥ埌鎺ㄨ崘   X鍧愭爣鍚戝彸绉诲姩216
             		animation=new TranslateAnimation(-offset,0,0,0);
-			}else if(currentIndex==2){//从同城移动到推荐   X坐标向左移动216
+			}else if(currentIndex==2){//浠庡悓鍩庣Щ鍔ㄥ埌鎺ㄨ崘   X鍧愭爣鍚戝乏绉诲姩216
 				animation=new TranslateAnimation(offset, 0,0,0);
 			}
 			break;
 		case 2:
-			if (currentIndex == 0) {//从关注移动到同城   X坐标向右移动216*2  记住起始x坐标是关注那里
+			if (currentIndex == 0) {//浠庡叧娉ㄧЩ鍔ㄥ埌鍚屽煄   X鍧愭爣鍚戝彸绉诲姩216*2  璁颁綇璧峰x鍧愭爣鏄叧娉ㄩ偅閲�
                 animation = new TranslateAnimation(-offset, offset, 0, 0);
-            } else if(currentIndex==1){//从推荐移动到同城   X坐标向右移动216
+            } else if(currentIndex==1){//浠庢帹鑽愮Щ鍔ㄥ埌鍚屽煄   X鍧愭爣鍚戝彸绉诲姩216
 				animation=new TranslateAnimation(0,offset,0,0);
 			}
 			break;
